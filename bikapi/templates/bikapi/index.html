@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>比卡皮</title>
+</head>
+<body>
+    <h3> 哈哈哈{{ buser.b_username }} </h3>
+    <hr>
+
+    {% for buname in buser %}
+
+    <p style="font-family: 微软雅黑;font-size: 14pt;font-weight: bold;">
+        {{ buname.b_uid }}
+        <hr>
+        {{ buname.b_regdate }}
+    </p>
+    {% endfor %}
+</body>
+</html>
