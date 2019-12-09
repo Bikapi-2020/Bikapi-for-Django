@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>比卡皮</title>
-    {% block title%} {% endblock %}
+    <title>
+        <!--此处为：网页标题-->
+        {% block title%} {% endblock %}
+    </title>
+
 </head>
 <body>
+    <!--此处引用：界面头部及11导航栏内容-->
+    {% include 'header.html' %}
 
+    <!--此处为：界面主体内容-->
+    {% block content %} {% endblock %}
 
-
-    {% block footer%} {% endblock %}
+    <!--此处引用：界面脚步内容111-->
+    {% include 'footer.html' %}
 </body>
 </html>
