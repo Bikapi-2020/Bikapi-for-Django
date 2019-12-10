@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('bikapi.urls')),
-    # path('captcha', include('captcha.urls')),
     path('admin/', admin.site.urls),
+    # 增加验证码的路径
+    path('captcha', include('captcha.urls')),
 ]

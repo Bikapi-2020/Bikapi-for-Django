@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页--比卡皮</title>
-</head>
-<body>
-    <h3> 哈哈哈{{ buser.b_username }} </h3>
-    <hr>
+{% extends 'bikapi/base.html' %}
+{% load static %}
+{% block title %}首页{% endblock %}
 
-    {% for buname in buser %}
-
-    <p style="font-family: 微软雅黑;font-size: 14pt;font-weight: bold;">
-        {{ buname.b_uid }}
-        <hr>
-        {{ buname.b_regdate }}
-    </p>
-    {% endfor %}
-</body>
-</html>
+{% block content %}
+    {% if request.session.is_login %}
+        <h1>你好，{{ user.id }}{{ request.session.user_name }}，欢迎回来！</h1>
+    {% else %}
+        <h1>您尚未登录，只能访问部分内容</h1>
+    {% endif %}
+{% endblock %}

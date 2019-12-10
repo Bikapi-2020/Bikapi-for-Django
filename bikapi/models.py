@@ -8,9 +8,9 @@ class B_user(models.Model):
     '''用户表'''
 
     role = (
-        (1,'摄影师'),
-        (2, 'Coser'),
-        (3, '二次元er'),
+        ('1', '摄影师'),
+        ('2', 'Coser'),
+        ('3', '二次元er'),
     )
 
     # 用户ID
@@ -22,7 +22,7 @@ class B_user(models.Model):
     # 注册时间
     b_regdate = models.DateTimeField(auto_now_add=datetime.now(), verbose_name='注册日期')
     # 角色选择
-    b_role = models.CharField(max_length=32,choices=role,default=3)
+    b_role = models.CharField(max_length=32, choices=role, default='二次元er', verbose_name='角色')
     # 邮箱地址
     # email = models.EmailField(unique=True)
 
