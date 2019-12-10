@@ -16,7 +16,7 @@ class B_user(models.Model):
     # 用户ID
     b_uid = models.AutoField(primary_key=True)
     # 用户名
-    b_username = models.CharField(max_length=32, blank=False, unique=True, verbose_name='用户名')
+    b_username = models.CharField(max_length=32, blank=False, verbose_name='用户名')# unique=True,
     # 用户密码
     b_password = models.CharField(max_length=16, blank=False, verbose_name='用户密码')
     # 注册时间
@@ -30,5 +30,6 @@ class B_user(models.Model):
         # 根据用户ID排序
         ordering = ["b_uid"]
         verbose_name = '用户名'
+        verbose_name_plural = '用户名'
     def __str__(self):
         return str(self.b_username)

@@ -6,8 +6,17 @@ from django.shortcuts import redirect
 from .models import B_user
 from django.db import models
 from .myforms import UserForm, RegisterForm
+import hashlib
 
 # Create your views here.
+
+
+def hash_code(s, salt='mysite'):
+    h = hashlib.sha256()
+    s += salt
+    h.update(s.encode())
+    return h.hexdigest()
+
 
 def index(request):
     '''首页'''
@@ -36,17 +45,17 @@ def login(request):
             # 更多的其它验证.....
             try:
                 user = B_user.objects.get(b_username=username)
-                if user.b_password == password:
+                if user.b_password == hash_code(password):
                     request.session['is_login'] = True
-                    request.session['user_id'] = user.id
-                    request.session['user_name'] = user.name
-                    return redirect('/index/', locals())
+                    request.session['user_id'] = user.b_uid
+                    request.session['user_name'] = user.b_username
+                    return redirect('/index/')
                 else:
                     message = '密码不正确！'
             except:
                 message = '用户名不存在！'
                 # return render(request, 'bikapi/login.html')
-            return render(request, 'bikapi/login.html', locals())
+        return render(request, 'bikapi/login.html', locals())
 
     login_form = UserForm()
     return render(request, 'bikapi/login.html', locals())
@@ -81,7 +90,7 @@ def register(request):
                 # 当一切都OK的情况下，创建新用户
                 new_user = B_user.objects.create()
                 new_user.b_username = username
-                new_user.b_password = password1
+                new_user.b_password = hash_code(password1)
                 # new_user.email = email
                 new_user.b_role = role
                 new_user.save()
