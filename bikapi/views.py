@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from datetime import datetime
 from django.shortcuts import redirect
-from .models import B_user
+from .models import B_User
 from django.db import models
 from .myforms import UserForm, RegisterForm
 import hashlib
@@ -21,7 +21,7 @@ def hash_code(s, salt='mysite'):
 def index(request):
     '''首页'''
     template = get_template('bikapi/index.html')
-    buser = B_user.objects.all()
+    buser = B_User.objects.all()
     html = template.render(locals())
 
     return HttpResponse(html)
@@ -44,7 +44,7 @@ def login(request):
             # 密码长度验证
             # 更多的其它验证.....
             try:
-                user = B_user.objects.get(b_username=username)
+                user = B_User.objects.get(b_username=username)
                 if user.b_password == hash_code(password):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.b_uid
@@ -78,7 +78,7 @@ def register(request):
                 message = "两次输入的密码不同！"
                 return render(request, 'bikapi/register.html', locals())
             else:
-                same_name_user = B_user.objects.filter(b_username=username)
+                same_name_user = B_User.objects.filter(b_username=username)
                 if same_name_user:  # 用户名唯一
                     message = '用户已经存在，请重新选择用户名！'
                     return render(request, 'bikapi/register.html', locals())
@@ -88,7 +88,7 @@ def register(request):
                 #     return render(request, 'bikapi/register.html', locals())
 
                 # 当一切都OK的情况下，创建新用户
-                new_user = B_user.objects.create()
+                new_user = B_User.objects.create()
                 new_user.b_username = username
                 new_user.b_password = hash_code(password1)
                 # new_user.email = email
