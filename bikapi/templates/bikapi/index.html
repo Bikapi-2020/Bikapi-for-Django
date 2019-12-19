@@ -1,0 +1,50 @@
+{% extends 'bikapi/base.html' %}
+{% load static %}
+{% block title %}首页{% endblock %}
+
+{% block content %}
+
+    <h3>强调类<small>工具</small></h3>
+    <p><em>加粗强调文本</em></p>
+    <p class="text-muted">.text-muted:提示，浅灰色</p>
+    <p class="text-danger">.text-muted:提示，浅红色</p>
+    <p class="text-right">文本右对齐</p>
+    <p class="text-center">文本居中对齐</p>
+    <p><abbr class="initialism" title="Cascading Style Sheets">css</abbr>是英语层叠样式表单的缩写，它是
+    一种用来表现HTML和XML等文件样式的计算机语言</p>
+    <p>PHP 中的变量名，前面要加上'$' 符号，例如：如 <code>$i = 1;</code>。</p>
+    <pre class="pre-scrollable">
+        &lt;!doctype html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+
+    </pre>
+
+    <textarea rows="3"></textarea>
+    <button type="button" class="btn">默认按钮效果</button>
+    <!--<div class="btn">-->
+    <button type="button" class="btn btn-default">默认</button>
+    <button type="button" class="btn btn-primary">主要</button>
+    <button type="button" class="btn btn-success">成功</button>
+    <button type="button" class="btn btn-info">信息</button>
+    <button type="button" class="btn btn-warning">警告</button>
+    <button type="button" class="btn btn-danger">危险</button>
+    <button type="button" class="btn btn-link">链接</button>
+    <!--</div>-->
+
+
+    <span class="label label-info">狐妖小红娘</span>
+    <span class="label label-info">斗罗大陆</span>
+    <span class="label label-info">斗破苍穹</span>
+    <span class="label label-default">默认</span>
+    <span class="label label-primary">主要</span>
+    <span class="label label-success">成功</span>
+    <span class="label label-warning">警告</span>
+    <span class="label label-danger">危险</span>
+
+    {% if request.session.is_login %}
+        <h1>你好，{{ user.id }}{{ request.session.user_name }}，欢迎回来！</h1>
+    {% else %}
+        <h1>您尚未登录，只能访问部分内容</h1>
+    {% endif %}
+{% endblock %}
