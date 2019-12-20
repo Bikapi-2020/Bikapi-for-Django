@@ -19,9 +19,9 @@ class B_User(models.Model):
     # 用户ID
     b_user_id = models.AutoField(primary_key=True)
     # 用户名
-    b_user_name = models.CharField(max_length=32, blank=False, verbose_name='用户名', unique=True)
+    b_user_name = models.CharField(max_length=32, blank=False, verbose_name='用户名')
     # 用户密码
-    b_user_password = models.CharField(max_length=16, blank=False, verbose_name='用户密码')
+    b_user_password = models.CharField(max_length=255, blank=False, verbose_name='用户密码')
     # 注册时间
     b_user_regdate = models.DateTimeField(auto_now_add=datetime.now(), verbose_name='注册日期')
     # 角色选择
@@ -33,7 +33,7 @@ class B_User(models.Model):
     # 用户性别
     b_user_sex = models.CharField(max_length=32, choices=sex, default='1', verbose_name='性别')
     # 用户生日
-    b_user_birthday = models.DateField(default=now, verbose_name='生日')
+    # b_user_birthday = models.DateField(default=now, verbose_name='生日')
     # 用户头像
     b_user_avatar = models.FileField(upload_to='static/images/', blank=True, verbose_name='头像')
 
@@ -53,7 +53,14 @@ class B_Manager(models.Model):
     b_manage_name = models.CharField(max_length=32, blank=False, verbose_name='管理员')
     # 管理员密码
     b_manage_password = models.CharField(max_length=16, blank=False, verbose_name='管理员密码')
-    pass
+
+    class Meta:
+        # 根据用户ID排序
+        ordering = ["b_manage_id"]
+        verbose_name = '管理员'
+        verbose_name_plural = '管理员'
+    def __str__(self):
+        return str(self.b_manage_name)
 
 
 class B_Zone(models.Model):
@@ -62,6 +69,14 @@ class B_Zone(models.Model):
     b_zone_id = models.AutoField(primary_key=True)
     # 分区名称
     b_zone_name = models.CharField(max_length=32)
+
+    class Meta:
+        # 根据用户ID排序
+        ordering = ["b_zone_id"]
+        verbose_name = '论坛分区'
+        verbose_name_plural = '论坛分区'
+    def __str__(self):
+        return str(self.b_zone_name)
 
 class B_Section(models.Model):
     '''板块表'''
@@ -79,6 +94,14 @@ class B_Section(models.Model):
     b_section_num = models.IntegerField()
     # 板块主题数
     b_section_count = models.IntegerField()
+
+    class Meta:
+        # 根据用户ID排序
+        ordering = ["b_section_id"]
+        verbose_name = '论坛板块'
+        verbose_name_plural = '论坛板块'
+    def __str__(self):
+        return str(self.b_section_id)
 
 class B_Topic2Tag(models.Model):
     '''标签多对多帖子表'''
@@ -113,6 +136,14 @@ class B_Topic(models.Model):
     # 点踩数
     b_topic_down_num = models.IntegerField(verbose_name='点赞数')
 
+    class Meta:
+        # 根据用户ID排序
+        ordering = ["b_topic_id"]
+        verbose_name = '帖子'
+        verbose_name_plural = '帖子'
+    def __str__(self):
+        return str(self.b_topic_id)
+
 
 class B_Comment(models.Model):
     '''评论表'''
@@ -126,6 +157,14 @@ class B_Comment(models.Model):
     b_comment_user = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING)
     b_comment_topic = models.ForeignKey(to='B_Topic', on_delete=models.DO_NOTHING)
     b_comment_parent = models.ForeignKey(to='self', null=True, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        # 根据用户ID排序
+        ordering = ["b_comment_id"]
+        verbose_name = '评论'
+        verbose_name_plural = '评论'
+    def __str__(self):
+        return str(self.b_comment_content)
 
 class B_Integral(models.Model):
     '''积分表'''
@@ -141,6 +180,14 @@ class B_Tag(models.Model):
     b_tag_name = models.CharField(max_length=32, verbose_name='标签名')
     # 外键字段--  帖子表
     # b_topic = models.ForeignKey(to='B_Topic', null=False, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        # 根据用户ID排序
+        ordering = ["b_tag_id"]
+        verbose_name = '标签'
+        verbose_name_plural = '标签'
+    def __str__(self):
+        return str(self.b_tag_name)
 
 class B_Up(models.Model):
     '''点赞表'''

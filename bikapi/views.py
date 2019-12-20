@@ -44,11 +44,11 @@ def login(request):
             # 密码长度验证
             # 更多的其它验证.....
             try:
-                user = B_User.objects.get(b_username=username)
-                if user.b_password == hash_code(password):
+                user = B_User.objects.get(b_user_name=username)
+                if user.b_user_password == hash_code(password):
                     request.session['is_login'] = True
-                    request.session['user_id'] = user.b_uid
-                    request.session['user_name'] = user.b_username
+                    request.session['user_id'] = user.b_user_id
+                    request.session['user_name'] = user.b_user_name
                     return redirect('/index/')
                 else:
                     message = '密码不正确！'
@@ -78,7 +78,7 @@ def register(request):
                 message = "两次输入的密码不同！"
                 return render(request, 'bikapi/register.html', locals())
             else:
-                same_name_user = B_User.objects.filter(b_username=username)
+                same_name_user = B_User.objects.filter(b_user_name=username)
                 if same_name_user:  # 用户名唯一
                     message = '用户已经存在，请重新选择用户名！'
                     return render(request, 'bikapi/register.html', locals())
@@ -89,10 +89,10 @@ def register(request):
 
                 # 当一切都OK的情况下，创建新用户
                 new_user = B_User.objects.create()
-                new_user.b_username = username
-                new_user.b_password = hash_code(password1)
+                new_user.b_user_name = username
+                new_user.b_user_password = hash_code(password1)
                 # new_user.email = email
-                new_user.b_role = role
+                new_user.b_user_role = role
                 new_user.save()
                 return redirect('/login/')  # 自动跳转到登录页面
     register_form = RegisterForm()

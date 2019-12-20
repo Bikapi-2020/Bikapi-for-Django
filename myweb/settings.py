@@ -79,13 +79,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'Bikapi_for_Django',
-        'USER': 'root',
-        'PASSWORD': 'aiman8_Cxh',
+        'NAME': 'Bikapi_Django',
+        'USER': 'Django',
+        'PASSWORD': 'Bikapi.net_Cxh',
         'HOST': '127.0.0.1',
         'PORT': '',
         'OPTIONS': {
-            'init_command': 'SET sql_mode=STRICT_TRANS_TABLES',
+            # 'init_command': 'SET sql_mode=STRICT_TRANS_TABLES',
+            'sql_mode': 'traditional',
         },
     }
 }
