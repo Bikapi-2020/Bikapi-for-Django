@@ -17,7 +17,7 @@ class B_User(models.Model):
     )
 
     # 用户ID
-    b_user_id = models.AutoField(primary_key=True)
+    b_user_id = models.AutoField(primary_key=True, verbose_name='用户ID')
     # 用户名
     b_user_name = models.CharField(max_length=32, blank=False, verbose_name='用户名')
     # 用户密码
@@ -48,7 +48,7 @@ class B_User(models.Model):
 class B_Manager(models.Model):
     '''管理员表'''
     # 管理员ID
-    b_manage_id = models.AutoField(primary_key=True)
+    b_manage_id = models.AutoField(primary_key=True, verbose_name='管理员ID')
     # 管理员名
     b_manage_name = models.CharField(max_length=32, blank=False, verbose_name='管理员')
     # 管理员密码
@@ -66,9 +66,9 @@ class B_Manager(models.Model):
 class B_Zone(models.Model):
     '''分区表'''
     # 分区ID
-    b_zone_id = models.AutoField(primary_key=True)
+    b_zone_id = models.AutoField(primary_key=True, verbose_name='分区ID')
     # 分区名称
-    b_zone_name = models.CharField(max_length=32)
+    b_zone_name = models.CharField(max_length=32, verbose_name='分区')
 
     class Meta:
         # 根据用户ID排序
@@ -81,19 +81,19 @@ class B_Zone(models.Model):
 class B_Section(models.Model):
     '''板块表'''
     # 板块ID
-    b_section_id = models.AutoField(primary_key=True)
+    b_section_id = models.AutoField(primary_key=True, verbose_name='板块ID')
     # 板块关联分区ID
-    b_section_zone = models.ForeignKey(to='B_Zone', on_delete=models.PROTECT)
+    b_section_zone = models.ForeignKey(to='B_Zone', on_delete=models.PROTECT, verbose_name='分区ID')
     # 板块名称
-    b_section_name = models.CharField(max_length=64)
+    b_section_name = models.CharField(max_length=64, verbose_name='板块')
     # 板主编号
-    b_section_uid = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING)
+    b_section_uid = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING, verbose_name='版主编号')
     # 板块说明
-    b_section_explanation = models.CharField(max_length=255)
+    b_section_explanation = models.CharField(max_length=255, verbose_name='板块说明')
     # 板块点击次数
-    b_section_num = models.IntegerField()
+    b_section_num = models.IntegerField(verbose_name='板块点击次数')
     # 板块主题数
-    b_section_count = models.IntegerField()
+    b_section_count = models.IntegerField(verbose_name='板块主题数')
 
     class Meta:
         # 根据用户ID排序
@@ -111,11 +111,11 @@ class B_Topic2Tag(models.Model):
 class B_Topic(models.Model):
     '''帖子表'''
     # 帖子编号
-    b_topic_id = models.AutoField(primary_key=True)
+    b_topic_id = models.AutoField(primary_key=True, verbose_name='帖子ID')
     # 帖子板块编号
-    b_topic_section = models.ForeignKey(to='B_Section', on_delete=models.DO_NOTHING)
+    b_topic_section = models.ForeignKey(to='B_Section', on_delete=models.DO_NOTHING, verbose_name='板块ID')
     # 帖子作者编号
-    b_topic_tuser = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING)
+    b_topic_tuser = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING, verbose_name='帖子作者ID')
     # 帖子表情
     # 帖子标题
     b_topic_title = models.CharField(max_length=64, blank=True, verbose_name='标题')
@@ -130,7 +130,7 @@ class B_Topic(models.Model):
     # 帖子评论数
     b_topic_comment_num = models.IntegerField(verbose_name='帖子评论次数')
     # 与标签多对多的关系
-    b_topic_tag = models.ManyToManyField(to='B_Tag', through='B_Topic2Tag')
+    b_topic_tag = models.ManyToManyField(to='B_Tag', through='B_Topic2Tag', verbose_name='外键-标签')
     # 点赞数
     b_topic_up_num = models.IntegerField(verbose_name='点赞数')
     # 点踩数
@@ -147,16 +147,16 @@ class B_Topic(models.Model):
 
 class B_Comment(models.Model):
     '''评论表'''
-    # 被评论的帖子ID
-    b_comment_id = models.AutoField(primary_key=True)
+    # 被评论ID
+    b_comment_id = models.AutoField(primary_key=True, verbose_name='评论ID')
     # 评论人名称
     # 评论内容
-    b_comment_content = models.CharField(max_length=255)
+    b_comment_content = models.CharField(max_length=255, verbose_name='评论内容')
     # 评论时间
-    b_comment_create_time = models.DateTimeField(auto_now_add=datetime.now())
-    b_comment_user = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING)
-    b_comment_topic = models.ForeignKey(to='B_Topic', on_delete=models.DO_NOTHING)
-    b_comment_parent = models.ForeignKey(to='self', null=True, on_delete=models.DO_NOTHING)
+    b_comment_create_time = models.DateTimeField(auto_now_add=datetime.now(), verbose_name='评论时间')
+    b_comment_user = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING, verbose_name='用户ID')
+    b_comment_topic = models.ForeignKey(to='B_Topic', on_delete=models.DO_NOTHING, verbose_name='帖子ID')
+    b_comment_parent = models.ForeignKey(to='self', null=True, on_delete=models.DO_NOTHING, verbose_name='父ID')
 
     class Meta:
         # 根据用户ID排序
@@ -169,13 +169,13 @@ class B_Comment(models.Model):
 class B_Integral(models.Model):
     '''积分表'''
     # 默认积分值
-    b_integral_num = models.IntegerField(default=-20)
+    b_integral_num = models.IntegerField(default=-20, verbose_name='积分值')
 
 
 class B_Tag(models.Model):
     '''标签表'''
     # 标签ID
-    b_tag_id = models.AutoField(primary_key=True)
+    b_tag_id = models.AutoField(primary_key=True, verbose_name='标签ID')
     # 标签名
     b_tag_name = models.CharField(max_length=32, verbose_name='标签名')
     # 外键字段--  帖子表
@@ -191,10 +191,10 @@ class B_Tag(models.Model):
 
 class B_Up(models.Model):
     '''点赞表'''
-    # 0表示踩，1表示攒
-    b_is_up = models.BooleanField()
+    # 0表示踩，1表示赞
+    b_is_up = models.BooleanField(verbose_name='是否点赞')
     # 与表B_User一对多关系
-    b_up_user = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING)
+    b_up_user = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING, verbose_name='用户ID')
     # 与表B_Topic一对多关系
-    b_up_topic = models.ForeignKey(to='B_Topic', on_delete=models.DO_NOTHING)
+    b_up_topic = models.ForeignKey(to='B_Topic', on_delete=models.DO_NOTHING, verbose_name='帖子ID')
 

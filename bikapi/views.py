@@ -19,7 +19,7 @@ def hash_code(s, salt='mysite'):
 
 
 def index(request):
-    '''首页'''
+    '''网站首页'''
     template = get_template('bikapi/index.html')
     buser = B_User.objects.all()
     html = template.render(locals())
@@ -104,3 +104,17 @@ def logout(request):
         return redirect('/index/')
     request.session.flush()
     return redirect('/index/')
+
+
+def forum(request):
+    '''论坛首页'''
+    pass
+
+def tag(request):
+    '''标签页'''
+    pass
+
+def topic(request):
+    '''帖子详情页'''
+    pass
+
