@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from datetime import datetime
 from django.shortcuts import redirect
-from .models import B_User
+from .models import B_User, B_Topic
 from django.db import models
 from .myforms import UserForm, RegisterForm
 import hashlib
@@ -17,7 +17,6 @@ def hash_code(s, salt='mysite'):
     h.update(s.encode())
     return h.hexdigest()
 
-
 def index(request):
     '''网站首页'''
     template = get_template('bikapi/index.html')
@@ -25,7 +24,6 @@ def index(request):
     html = template.render(locals())
 
     return HttpResponse(html)
-
 
 def login(request):
     '''登录'''
@@ -105,16 +103,40 @@ def logout(request):
     request.session.flush()
     return redirect('/index/')
 
-
 def forum(request):
     '''论坛首页'''
-    pass
+    return HttpResponse('论坛首页')
 
-def tag(request):
-    '''标签页'''
-    pass
+def zone(request):
+    '''论坛分区页'''
+    return HttpResponse('论坛分区页')
+
+def section(request):
+    '''论坛版块页'''
+    return HttpResponse('论坛版块页')
 
 def topic(request):
     '''帖子详情页'''
-    pass
+    template = get_template('bikapi/topicinfo.html')
+    btopic = B_Topic.objects.get(b_topic_id=1)
+    btopic2 = B_Topic.objects.all()
+    html = template.render(locals())
 
+    return HttpResponse(html)
+    # return HttpResponse('帖子详情页')
+
+def tag(request):
+    '''标签页'''
+    return HttpResponse('标签页')
+
+def top(request):
+    '''排行榜'''
+    return HttpResponse('排行榜')
+
+def userinfo(request):
+    '''用户首页'''
+    return HttpResponse('用户首页')
+
+def release(request):
+    '''发帖'''
+    return HttpResponse('发帖')

@@ -1,0 +1,14 @@
+{% extends 'bikapi/base.html' %}
+{% load static %}
+{% block title %}首页{% endblock %}
+
+
+
+{% block content %}
+    <h4></h4>
+    {% for bt in btopic2 %}
+        <h3>{{ bt.b_topic_title }}</h3>
+        <p>{{ btopic.b_topic_content }}</p>
+    {% endfor %}
+
+{% endblock %}

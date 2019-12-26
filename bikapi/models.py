@@ -41,7 +41,7 @@ class B_User(models.Model):
         # 根据用户ID排序
         ordering = ["b_user_id"]
         verbose_name = '用户名'
-        verbose_name_plural = '用户名'
+        verbose_name_plural = '用户'
     def __str__(self):
         return str(self.b_user_name)
 
@@ -91,9 +91,10 @@ class B_Section(models.Model):
     # 板块说明
     b_section_explanation = models.CharField(max_length=255, verbose_name='板块说明')
     # 板块点击次数
-    b_section_num = models.IntegerField(verbose_name='板块点击次数')
+    b_section_num = models.IntegerField(default=0, verbose_name='板块点击次数')
     # 板块主题数
-    b_section_count = models.IntegerField(verbose_name='板块主题数')
+    b_section_count = models.IntegerField(default=0, verbose_name='板块主题数')
+    # 板块分类
 
     class Meta:
         # 根据用户ID排序
@@ -101,7 +102,7 @@ class B_Section(models.Model):
         verbose_name = '论坛板块'
         verbose_name_plural = '论坛板块'
     def __str__(self):
-        return str(self.b_section_id)
+        return str(self.b_section_name)
 
 class B_Topic2Tag(models.Model):
     '''标签多对多帖子表'''
@@ -123,18 +124,20 @@ class B_Topic(models.Model):
     b_topic_desc = models.CharField(max_length=255, verbose_name='摘要')
     # 帖子内容
     b_topic_content = models.TextField(verbose_name='帖子内容')
+    # 帖子附件
+    b_topic_file = models.FileField(upload_to='static/images/', blank=True, verbose_name='附件')
     # 发帖时间
     b_topic_createtime = models.DateTimeField(auto_now_add=datetime.now(), verbose_name='发帖时间')
     # 帖子点击次数
-    b_topic_click_num = models.IntegerField(verbose_name='帖子点击次数')
+    b_topic_click_num = models.IntegerField(default=0, verbose_name='帖子点击次数')
     # 帖子评论数
-    b_topic_comment_num = models.IntegerField(verbose_name='帖子评论次数')
+    b_topic_comment_num = models.IntegerField(default=0, verbose_name='帖子评论次数')
     # 与标签多对多的关系
     b_topic_tag = models.ManyToManyField(to='B_Tag', through='B_Topic2Tag', verbose_name='外键-标签')
     # 点赞数
-    b_topic_up_num = models.IntegerField(verbose_name='点赞数')
+    b_topic_up_num = models.IntegerField(default=0, verbose_name='点赞数')
     # 点踩数
-    b_topic_down_num = models.IntegerField(verbose_name='点赞数')
+    b_topic_down_num = models.IntegerField(default=0, verbose_name='点踩数')
 
     class Meta:
         # 根据用户ID排序
@@ -142,7 +145,7 @@ class B_Topic(models.Model):
         verbose_name = '帖子'
         verbose_name_plural = '帖子'
     def __str__(self):
-        return str(self.b_topic_id)
+        return str(self.b_topic_title)
 
 
 class B_Comment(models.Model):
@@ -156,7 +159,7 @@ class B_Comment(models.Model):
     b_comment_create_time = models.DateTimeField(auto_now_add=datetime.now(), verbose_name='评论时间')
     b_comment_user = models.ForeignKey(to='B_User', on_delete=models.DO_NOTHING, verbose_name='用户ID')
     b_comment_topic = models.ForeignKey(to='B_Topic', on_delete=models.DO_NOTHING, verbose_name='帖子ID')
-    b_comment_parent = models.ForeignKey(to='self', null=True, on_delete=models.DO_NOTHING, verbose_name='父ID')
+    # b_comment_parent = models.ForeignKey(to='self', null=True, on_delete=models.DO_NOTHING, verbose_name='父ID')
 
     class Meta:
         # 根据用户ID排序

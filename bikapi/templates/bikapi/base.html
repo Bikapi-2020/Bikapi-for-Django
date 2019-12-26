@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>{% block title %}网站框架{% endblock %}</title>
-
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -18,26 +17,59 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      .container-fluid{
+        width: 80%;margin-right:auto;margin-left:auto;
+      }
+      .navbar1 {
+          position: relative;
+          min-height: 181px;
+          margin-bottom: 0;
+          border: 1px solid transparent;
+      }
+      .searchParent {
+        position: relative;
+      }
+      .searchDiv {
+        position: absolute;
+        left: 50%;
+        margin-left: -163px;
+        top: 0;
+      }
+      .footer-top{
+          margin-top: 200px;
+      }
+    </style>
     {% block css %}{% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-default">
+
+    <div>
+        <nav class="navbar1 navbar-default navbar-fixed-top" style="background-image: url('../../static/images/6.png');">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
+          <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
             <span class="sr-only">切换导航条</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">比卡皮</a>
+          <!-- 网站名称，也可以设置为图标 -->
+          <a class="navbar-brand" href="#"><img alt="Bikapi" src="../../static/images/logo_bikapi.png" height="59" width="88"></a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="my-nav">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/index/">主页</a></li>
+        <div class="collapse navbar-collapse container searchParent">
+          <ul class="nav navbar-nav searchDiv">
+            <li>
+                <button type="button" class="btn btn-default navbar-btn">排行榜</button>
+            </li>
+            <form class="navbar-form navbar-left" role="search" style="text-align:center">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入搜索内容">
+              </div>
+              <button type="submit" class="btn btn-default">搜索</button>
+            </form>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
@@ -47,13 +79,54 @@
                   <li><a href="/login/">登录</a></li>
                   <li><a href="/register/">注册</a></li>
               {% endif %}
+
+              <li><button type="button" class="btn btn-default navbar-btn"><a href="/release/">发布</a></button></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse container">
+                  <ul class="nav navbar-nav">
+                      <li role="presentation" class="active"><a href="/index/">首页</a></li>
+                      <li role="presentation"><a href="/section/">漫展</a></li>
+                      <li role="presentation"><a href="/forum/">论坛</a></li>
+                      <li role="presentation"><a href="/section/">皮站百科</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-    {% block content %}{% endblock %}
+    <div class="container-fluid">
+        <div class="row">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
 
+    <div class="container-fluid footer-top">
+        <div class="row">
+            <!--可以使用  text-center 文本居中-->
+            <div class="col-md-3 col-md-offset-4">
+                <ul class="list-inline ulfount" >
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">友情链接</a></li>
+                    <li><a href="#">小黑屋</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p>版权所有，保留一切权利！©2019 比卡皮 </p>
+            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502004137">
+                <img src="../../static/images/备案图标.png" height="20" width="20"/>粤公网安备44030502004137号
+            </a>
+            <a href="http://www.beian.miit.gov.cn" style="margin-left: 15px">粤ICP备18071263号</a>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/jquery-3.4.1.js' %}"></script>

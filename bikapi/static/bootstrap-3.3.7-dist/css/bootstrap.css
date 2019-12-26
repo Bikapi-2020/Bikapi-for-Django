@@ -4460,6 +4460,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-btn {
   margin-top: 8px;
   margin-bottom: 8px;
+
 }
 .navbar-btn.btn-sm {
   margin-top: 10px;
@@ -4969,6 +4970,7 @@ a.badge:focus {
 .jumbotron p {
   margin-bottom: 15px;
   font-size: 21px;
+  font-family: 微软雅黑;
   font-weight: 200;
 }
 .jumbotron > hr {
