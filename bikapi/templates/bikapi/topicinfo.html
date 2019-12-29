@@ -9,6 +9,12 @@
     {% for bt in btopic2 %}
         <h3>{{ bt.b_topic_title }}</h3>
         <p>{{ btopic.b_topic_content }}</p>
+        <img src="{{MEDIA_URL}}{{bt.b_topic_file}}">
+        <img src='{{MEDIA_URL}}{{ bt.b_topic_file}}'>
+        <img src='{{ bt.b_topic_file}}'>
+        <p>{{MEDIA_URL}}</p>
+        <p>{{bt.b_topic_file}}</p>
     {% endfor %}
+    
 
 {% endblock %}

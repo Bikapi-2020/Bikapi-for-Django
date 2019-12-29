@@ -105,7 +105,9 @@ def logout(request):
 
 def forum(request):
     '''论坛首页'''
-    return HttpResponse('论坛首页')
+    template = get_template('bikapi/forum.html')
+    html = template.render()
+    return HttpResponse(html)
 
 def zone(request):
     '''论坛分区页'''

@@ -1,74 +1,190 @@
 {% extends 'bikapi/base.html' %}
 {% load static %}
 {% block title %}首页{% endblock %}
-
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block content %}
     {% if request.session.is_login %}
-        <h1>你好，{{ request.session.user_name }}，欢迎回来！</h1>
+        <!--<h1>你好，{{ request.session.user_name }}，欢迎回来！</h1>-->
     {% else %}
-        <!--<h1>您尚未登录，只能访问部分内容</h1>-->
+        <h1>您尚未登录，只能访问部分内容</h1>
     {% endif %}
     <!--<div  class='index'>-->
-        <div class="container-fluid">
+        <!--<div class="container-fluid">-->
             <div class="row">
               <div class="col-xs-5" style="padding-left: 0;padding-right: 0;">
-                  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <!-- 指示器Indicators -->
-                  <ol class="carousel-indicators" >
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                  </ol>
+                  <div class="box" style="padding-bottom: 56.25%;height: 0;">
+                      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                          <!-- 指示器Indicators -->
+                          <ol class="carousel-indicators" >
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                          </ol>
 
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <a href="#"><img src="../../static/images/1.jpg" alt="漫展"></a>
-                        <div class="carousel-caption">
-                        漫展
-                      </div>
-                    </div>
-                    <div class="item">
-                      <a href="#"><img src="../../static/images/2.png" alt="漫展"></a>
-                      <div class="carousel-caption">
-                        漫展
-                      </div>
-                    </div>
-                    <div class="item">
-                      <a href="#"><img src="../../static/images/4.jpg" alt="漫展"></a>
-                      <div class="carousel-caption">
-                        漫展
-                      </div>
-                    </div>
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <a href="#"><img src="../../static/images/1.jpg" alt="漫展"></a>
+                                <div class="carousel-caption">
+                                漫展
+                              </div>
+                            </div>
+                            <div class="item">
+                              <a href="#"><img src="../../static/images/2.png" alt="漫展"></a>
+                              <div class="carousel-caption">
+                                漫展
+                              </div>
+                            </div>
+                            <div class="item">
+                              <a href="#"><img src="../../static/images/4.jpg" alt="漫展"></a>
+                              <div class="carousel-caption">
+                                漫展
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Controls -->
+                          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">上一张</span>
+                          </a>
+                          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">下一张</span>
+                          </a>
+                        </div>
                   </div>
-                  <!-- Controls -->
-                  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">上一张</span>
-                  </a>
-                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">下一张</span>
-                  </a>
+              </div>
+              <div class="col-xs-6" style="padding-left: 0;padding-right: 0;">
+                <div class="box" style="padding-bottom: 4%;height: 0;">近期漫展
+                    <button type="button" class="btn btn-link text-left">更多</button>
                 </div>
               </div>
-              <div class="col-xs-6" style="height: 47px;margin-bottom: 0px;">近期漫展
-                <button type="button" class="btn btn-link text-left">更多</button>
+              <div class="col-xs-1" style="padding-left: 0;padding-right: 0">
+                <div class="box" style="padding-bottom: 4%;height: 0;margin-right: 0;">用户
+                    <button type="button" class="btn btn-link text-left" style="right: auto">更多</button>
+                </div>
               </div>
-              <div class="col-xs-2" style="background-color: #dedef8;min-height: 150px;margin-bottom: 10px;"></div>
-              <div class="col-xs-2" style="background-color: #dedef8;min-height: 150px;margin-bottom: 10px;"></div>
-              <div class="col-xs-2" style="background-color: #dedef8;min-height: 150px;margin-bottom: 10px;"></div>
-              <div class="col-xs-2" style="background-color: #dedef8;min-height: 150px;margin-bottom: 10px;"></div>
-              <div class="col-xs-2" style="background-color: #dedef8;min-height: 150px;margin-bottom: 10px;"></div>
-              <div class="col-xs-2" style="background-color: #dedef8;min-height: 150px;margin-bottom: 10px;"></div>
-              <div class="col-xs-12" style="background-color: #dedef8;min-height: 10px;box-shadow:
-         inset 1px -1px 1px #444, inset -1px 1px 1px #444;"></div>
+              <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                <div class="box"  style="padding-bottom: 129%;height: 0;"></div>
+              </div>
+              <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;"><div class="box" style="padding-bottom: 129%;height: 0;"></div></div>
+              <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;"><div class="box"  style="padding-bottom: 129%;height: 0;"></div></div>
+              <div class="col-xs-1" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;"><div class="box"  style="padding-bottom: 258%;height: 0;"></div></div>
+              </div>
+              <!--<div class="col-xs-2" style="background-color: #dedef8;min-height: 255px;margin-bottom: 10px;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;"></div>-->
+            <div class="row">
+                <div class="col-xs-12" style="padding-left: 0;padding-right: 0">
+                    <div class="box" style="padding-bottom: 2%;height: 0;">热门</div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
             </div>
             <div class="row">
-                <div class="col-xs-12" style="background-color: #dedef8;min-height: 10px;box-shadow:
-         inset 1px -1px 1px #444, inset -1px 1px 1px #444;"></div>
+                <div class="col-xs-12" style="padding-left: 0;padding-right: 0">
+                    <div class="box" style="padding-bottom: 2%;height: 0;">精选</div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
+                <div class="col-xs-2" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 0;">
+                    <div class="box"  style="padding-bottom: 56.25%;height: 0;">
+                        <img src="../../static/images/5.jpg" style="width: 100%"/>
+                    </div>
+                    <div class="box"  style="padding-bottom: 36.95%;height: 0;">
+                        比卡皮
+                    </div>
+                </div>
             </div>
-        </div>
+
+
+
+
+        <!--</div>-->
     <!--</div>-->
 {% endblock %}

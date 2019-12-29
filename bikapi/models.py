@@ -125,7 +125,7 @@ class B_Topic(models.Model):
     # 帖子内容
     b_topic_content = models.TextField(verbose_name='帖子内容')
     # 帖子附件
-    b_topic_file = models.FileField(upload_to='static/images/', blank=True, verbose_name='附件')
+    b_topic_file = models.FileField(upload_to='images', blank=True, verbose_name='附件')
     # 发帖时间
     b_topic_createtime = models.DateTimeField(auto_now_add=datetime.now(), verbose_name='发帖时间')
     # 帖子点击次数
