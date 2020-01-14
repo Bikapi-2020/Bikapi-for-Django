@@ -2,9 +2,16 @@
 {% load static %}
 {% block title %}论坛{% endblock %}
 
-
-
 {% block content %}
     <h4>论坛首页</h4>
+    <br/>
+
+{% for top in topic%}
+    <h3><a href="/topic/{{top.b_topic_id}}/">{{ top.b_topic_title }}</a></h3>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-8" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 10px;min-height: 180px;margin-bottom: 10px;"></div>-->
+        <!--<div class="col-xs-4" style="background-color: #dedef8;box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;padding-left: 0;padding-right: 10px;min-height: 180px;margin-bottom: 10px;"></div>-->
+    <!--</div>-->
+{% endfor %}
 
 {% endblock %}

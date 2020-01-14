@@ -15,11 +15,12 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
       .container-fluid{
-        width: 80%;margin-right:auto;margin-left:auto;
+        width: 70%;margin-right:auto;margin-left:auto;
       }
       .navbar1 {
           position: relative;
@@ -88,13 +89,12 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse container">
-                  <ul class="nav navbar-nav">
-                      <li role="presentation" class="active"><a href="/index/">首页</a></li>
-                      <li role="presentation"><a href="/topic/">漫展</a></li>
-                      <li role="presentation"><a href="/forum/">论坛</a></li>
-                      <li role="presentation"><a href="/topic/">皮站百科</a></li>
-                    </ul>
-                </div>
+                  <ul class="nav nav-pills">
+                    <li role="presentation" class="active"><a href="/index/">首页</a></li>
+                    <li role="presentation"><a href="/topic_comicon/">漫展</a></li>
+                    <li role="presentation"><a href="/forum/">社区</a></li>
+                    <li role="presentation"><a href="/topic_baike/">皮站百科</a></li>
+                  </ul>
             </div>
         </nav>
     </div>
@@ -130,5 +130,20 @@
     <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+
+
+    <!--导航条不会自动激活active类样式处理方案：-->
+    <script type="text/javascript">
+        $(function () {
+          $(".nav-pills").find("li").each(function () {
+            var a = $(this).find("a:first")[0];
+            if ($(a).attr("href") === location.pathname) {
+              $(this).addClass("active");
+            } else {
+              $(this).removeClass("active");
+            }
+          });
+        })
+    </script>
   </body>
 </html>

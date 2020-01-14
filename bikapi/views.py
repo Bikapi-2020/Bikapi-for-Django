@@ -21,6 +21,7 @@ def index(request):
     '''网站首页'''
     template = get_template('bikapi/index.html')
     buser = B_User.objects.all()
+    btopic = B_Topic.objects.get(b_topic_id=1)
     html = template.render(locals())
 
     return HttpResponse(html)
@@ -106,7 +107,8 @@ def logout(request):
 def forum(request):
     '''论坛首页'''
     template = get_template('bikapi/forum.html')
-    html = template.render()
+    topic = B_Topic.objects.all()
+    html = template.render(locals())
     return HttpResponse(html)
 
 def zone(request):
@@ -117,15 +119,33 @@ def section(request):
     '''论坛版块页'''
     return HttpResponse('论坛版块页')
 
-def topic(request):
+def topic(request,id):
     '''帖子详情页'''
     template = get_template('bikapi/topicinfo.html')
+    btopic = B_Topic.objects.get(b_topic_id=id)
+    # btopic2 = B_Topic.objects.all()
+    html = template.render(locals())
+
+    return HttpResponse(html)
+    # return HttpResponse('帖子详情页')
+
+def topic_comicon(reqyest):
+    '''漫展列表页'''
+    template = get_template('bikapi/topic_comicon.html')
     btopic = B_Topic.objects.get(b_topic_id=1)
     btopic2 = B_Topic.objects.all()
     html = template.render(locals())
 
     return HttpResponse(html)
-    # return HttpResponse('帖子详情页')
+
+def topic_baike(request):
+    '''皮站百科'''
+    template = get_template('bikapi/topic_baike.html')
+    btopic = B_Topic.objects.get(b_topic_id=1)
+    btopic2 = B_Topic.objects.all()
+    html = template.render(locals())
+
+    return HttpResponse(html)
 
 def tag(request):
     '''标签页'''

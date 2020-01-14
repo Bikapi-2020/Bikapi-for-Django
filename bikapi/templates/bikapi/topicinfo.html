@@ -1,20 +1,15 @@
 {% extends 'bikapi/base.html' %}
 {% load static %}
-{% block title %}首页{% endblock %}
+{% block title %}社区{% endblock %}
 
 
 
 {% block content %}
-    <h4></h4>
-    {% for bt in btopic2 %}
-        <h3>{{ bt.b_topic_title }}</h3>
+    <h4>帖子详情</h4>
+        <h3>{{ btopic.b_topic_title }}</h3>
         <p>{{ btopic.b_topic_content }}</p>
-        <img src="{{MEDIA_URL}}{{bt.b_topic_file}}">
-        <img src='{{MEDIA_URL}}{{ bt.b_topic_file}}'>
-        <img src='{{ bt.b_topic_file}}'>
-        <p>{{MEDIA_URL}}</p>
-        <p>{{bt.b_topic_file}}</p>
-    {% endfor %}
-    
-
+        <img src="/media/{{btopic.b_topic_file}}">
+        <!--<img src='{{MEDIA_URL}}{{ bt.b_topic_file}}'>-->
+        <!--<img src='{{ bt.b_topic_file}}'>-->
+        <!--<img src='media/{{ bt.b_topic_file}}'>-->
 {% endblock %}
