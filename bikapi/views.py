@@ -48,6 +48,7 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.b_user_id
                     request.session['user_name'] = user.b_user_name
+                    request.session['user_id'] = user.b_user_id
                     return redirect('/index/')
                 else:
                     message = '密码不正确！'
@@ -155,9 +156,13 @@ def top(request):
     '''排行榜'''
     return HttpResponse('排行榜')
 
-def userinfo(request):
+def userinfo(request,userid):
     '''用户首页'''
-    return HttpResponse('用户首页')
+    template = get_template('bikapi/userinfo.html')
+    user = B_User.objects.get(b_user_id=userid)
+    html = template.render(locals())
+
+    return HttpResponse(html)
 
 def release(request):
     '''发帖'''

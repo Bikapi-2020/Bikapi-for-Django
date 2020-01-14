@@ -21,7 +21,7 @@ urlpatterns = [
     # 排行榜
     path('top/', views.top, name='top'),
     # 用户首页
-    path('userinfo/', views.userinfo, name='userinfo'),
+    path('userinfo/<int:userid>/', views.userinfo, name='userinfo'),
     # 论坛分区页
     path('zone/', views.zone, name='zone'),
     # 论坛版块页

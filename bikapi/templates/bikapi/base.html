@@ -74,11 +74,11 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   {% if request.session.is_login %}
-                      <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
-                      <li><a href="/logout/">登出</a></li>
+                      <li><a href="/userinfo/{{ request.session.user_id }}" style="color: yellow;">当前用户：{{ request.session.user_name }}</a></li>
+                      <li><a href="/logout/" style="color: yellow;">退出</a></li>
                   {% else %}
-                      <li><a href="/login/">登录</a></li>
-                      <li><a href="/register/">注册</a></li>
+                      <li><a href="/login/" style="color: yellow;">登录</a></li>
+                      <li><a href="/register/" style="color: yellow;">注册</a></li>
                   {% endif %}
 
                   <li><button type="button" class="btn btn-default navbar-btn"><a href="/release/">发布</a></button></li>
