@@ -5,6 +5,8 @@
 {% block content %}
     <h4>用户首页</h4>
     <br/>
-    <h3>用户：{{ user.b_user_name }} </br></br>欢迎光临</h3>
+    <h3>用户：{{ user.b_user_name }} </br></br>欢迎光临11</h3>
+    <p><a href="/set_password/{{ request.session.user_id }}" style="color: yellow;">修改密码</a></p>
+    <p>修改头像</p>
 
 {% endblock %}

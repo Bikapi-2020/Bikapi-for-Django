@@ -5,7 +5,7 @@ from datetime import datetime
 from django.shortcuts import redirect
 from .models import B_User, B_Topic
 from django.db import models
-from .myforms import UserForm, RegisterForm
+from .myforms import UserForm, RegisterForm, SetPassword
 import hashlib
 
 # Create your views here.
@@ -74,6 +74,7 @@ def register(request):
             password2 = register_form.cleaned_data['password2']
             # email = register_form.cleaned_data['email']
             role = register_form.cleaned_data['role']
+            avatar = register_form.cleaned_data['avatar']
             if password1 != password2:  # 判断两次密码是否相同
                 message = "两次输入的密码不同！"
                 return render(request, 'bikapi/register.html', locals())
@@ -93,6 +94,7 @@ def register(request):
                 new_user.b_user_password = hash_code(password1)
                 # new_user.email = email
                 new_user.b_user_role = role
+                new_user.b_user_avatar = avatar
                 new_user.save()
                 return redirect('/login/')  # 自动跳转到登录页面
     register_form = RegisterForm()
@@ -163,6 +165,34 @@ def userinfo(request,userid):
     html = template.render(locals())
 
     return HttpResponse(html)
+
+def set_password(request,userid):
+    if not request.session.get('is_login', None):
+        return redirect('/index/')
+    response_msg = {'code': 100, 'msg': 'sdfadfdsa'}
+
+    if request.method == 'POST':
+        setpassword_form = SetPassword(request.POST)
+        if setpassword_form.is_valid():  # 获取表单数据
+            passwordset = setpassword_form.cleaned_data['passwordset']
+            passwordset1 = setpassword_form.cleaned_data['passwordset1']
+            passwordset2 = setpassword_form.cleaned_data['passwordset2']
+            user = B_User.objects.get(b_user_id=userid)
+            if user.b_user_password == hash_code(passwordset):# 判断原密码是否与数据库密码一致
+                if passwordset1 == passwordset2:# 判断两次修改密码是否输入正确，如果正确，则修改密码
+                    encrypt = hash_code(passwordset1)# 加密
+                    request.user.set_password(encrypt)# 修改数据库密码
+                    request.session.flush()
+                    return redirect('/login/')
+                else:
+                    response_msg['msg'] = '两次密码不一致，请检查后重新输入'
+            else:# 不一致，则弹出提示并返回修改密码界面
+                response_msg['msg'] = '原密码错误，请重新输入'
+    register_form = SetPassword()
+    return render(request, 'bikapi/set_password.html', locals())
+
+def set_avatar(request,userid):
+    pass
 
 def release(request):
     '''发帖'''

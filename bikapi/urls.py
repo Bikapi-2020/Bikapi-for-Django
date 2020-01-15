@@ -22,6 +22,8 @@ urlpatterns = [
     path('top/', views.top, name='top'),
     # 用户首页
     path('userinfo/<int:userid>/', views.userinfo, name='userinfo'),
+    # 修改密码
+    path('set_password/<int:userid>/', views.set_password, name='setpassword'),
     # 论坛分区页
     path('zone/', views.zone, name='zone'),
     # 论坛版块页

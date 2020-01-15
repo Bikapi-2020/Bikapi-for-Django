@@ -35,7 +35,7 @@ class B_User(models.Model):
     # 用户生日
     # b_user_birthday = models.DateField(default=now, verbose_name='生日')
     # 用户头像
-    b_user_avatar = models.FileField(upload_to='static/images/', blank=True, verbose_name='头像')
+    b_user_avatar = models.FileField(upload_to='static/images/', blank=True, verbose_name='头像', default='static/images/logo_bikapi.png')
 
     class Meta:
         # 根据用户ID排序
@@ -51,8 +51,6 @@ class B_Manager(models.Model):
     b_manage_id = models.AutoField(primary_key=True, verbose_name='管理员ID')
     # 管理员名
     b_manage_name = models.CharField(max_length=32, blank=False, verbose_name='管理员')
-    # 管理员密码
-    b_manage_password = models.CharField(max_length=16, blank=False, verbose_name='管理员密码')
 
     class Meta:
         # 根据用户ID排序
