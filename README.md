@@ -1,1 +1,1 @@
-使用Django框架开发建议论坛，包括，用户登录，发帖，评论，点赞点踩等基本功能
+Use the Django framework to develop suggestion forums, including basic functions such as user login, posting, comments, likes, and dislikes
